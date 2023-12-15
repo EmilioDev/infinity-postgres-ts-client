@@ -1,0 +1,32 @@
+{
+  "name": "infinity-postgres-ts-client",
+  "version": "1.0.0",
+  "description": "this is the postgres db client for all the typescript microservices",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:introspect": "dotenv -- prisma introspect",
+    "db:generate": "dotenv -- prisma generate",
+    "migrate": "prisma migrate dev",
+    "migrate:test": "dotenv -e .env.test -- prisma migrate dev",
+    "postinstall": "tsc && cp src/index.d.ts dist/index.d.ts && npx prisma@5.7.0 generate"
+  },
+  "keywords": [
+    "databases",
+    "postgresql",
+    "typescript",
+    "infinity",
+    "client"
+  ],
+  "author": "Bismarck",
+  "license": "MIT",
+  "devDependencies": {
+    "dotenv-cli": "^7.3.0",
+    "prisma": "^5.7.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.7.0"
+  }
+}

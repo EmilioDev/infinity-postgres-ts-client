@@ -1,0 +1,197 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//basic data of all users
+model User {
+  identifier Int @id @default(autoincrement())
+
+  name String
+  last_name String?
+
+  phone String?
+  email String?
+  country String?
+  degrees String?
+  photo String?
+
+  password_hash String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relations
+  institution Institution[]
+  metodologist Metodologist[]
+  teacher Teacher[]
+  student Student[]
+
+  @@map("users")
+}
+
+//institutions
+model Institution {
+  identifier Int @id @default(autoincrement())
+
+  NIT String @unique
+  REEUP String @unique
+
+  website String?
+  address String?
+
+  evaluativeSchemeUsed String @default("1;2;3;4;5")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  rector Int
+  user User @relation(fields: [rector], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
+
+  //relations
+  courses Subject[]
+
+  @@map("institutions")
+}
+
+//te creas un metodologista por cada asignatura en la que eres metodologista, 
+//validar repeticiones
+//the metodologist
+model Metodologist {
+  identifier Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId Int
+  user User @relation(fields: [userId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
+
+  //courses CourseToMetodologist[]
+  courseId Int
+  course Subject @relation(fields: [courseId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("metodologist")
+}
+
+//also known as subject, course, asignatura...
+model Subject {
+  identifier Int @id @default(autoincrement())
+
+  name String
+  grade Int @default(1)//this is for the year where this subject is imparted
+  description String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  institutionId Int
+  institution Institution @relation(fields: [institutionId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
+
+  //relations
+  metodologists Metodologist[]
+  teachers Teacher[]
+  students Student[]
+
+  @@map("course")
+}
+
+//exercises of each subject
+model Resource {
+  identifier Int @id @default(autoincrement())
+
+  name String
+  description String?
+  photo String?
+  requiresOnline Boolean @default(false)
+  evaluation Int @default(0)
+
+  data Json?
+
+  @@map("resources")
+}
+
+//teachers
+model Teacher {
+  identifier Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relations
+  courseId Int
+  course Subject @relation(fields: [courseId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
+  userId Int
+  user User @relation(fields: [userId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("teachers")
+}
+
+//students
+model Student {
+  identifier Int @id @default(autoincrement())
+
+  pendingApproval Boolean @default(true)
+
+  evaluations Evaluation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relations
+  userId Int
+  user User @relation(fields: [userId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
+  courseId Int
+  course Subject @relation(fields: [courseId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("students")
+}
+
+//evaluations
+model Evaluation {
+  identifier Int @id @default(autoincrement())
+
+  valueId Int
+  value EvaluationSystemValue @relation(fields: [valueId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
+  evaluationName String?
+  isFinal Boolean @default(false)
+
+  studentId Int
+  student Student @relation(fields: [studentId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("evaluations")
+}
+
+//evaluation systems, because there are many of them
+model EvaluationSystem {
+  identifier Int @id @default(autoincrement())
+
+  name String
+  description String?
+
+  values EvaluationSystemValue[]
+
+  @@map("evaluationSystems")
+}
+
+//possible values of each evaluation system
+model EvaluationSystemValue {
+  identifier Int @id @default(autoincrement())
+
+  name String
+  value Int
+  description String?
+
+  studentsEvaluations Evaluation[]
+
+  systemId Int
+  system EvaluationSystem @relation(fields: [systemId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("evaluationSystemValues")
+}
