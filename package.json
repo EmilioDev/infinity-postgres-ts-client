@@ -28,5 +28,8 @@
   },
   "dependencies": {
     "@prisma/client": "^5.7.0"
+  },
+  "publishConfig": {
+    "@emiliodev:registry": "https://npm.pkg.github.com"
   }
 }
