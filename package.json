@@ -1,5 +1,5 @@
 {
-  "name": "infinity-postgres-ts-client",
+  "name": "@emiliodev/infinity-postgres-ts-client",
   "version": "1.0.0",
   "description": "this is the postgres db client for all the typescript microservices",
   "main": "./src/index.ts",
