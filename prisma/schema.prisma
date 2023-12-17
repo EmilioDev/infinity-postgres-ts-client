@@ -14,7 +14,7 @@ datasource db {
 model User {
   identifier Int @id @default(autoincrement())
 
-  name String
+  name String?
   last_name String?
 
   phone String?
@@ -40,6 +40,7 @@ model User {
 //institutions
 model Institution {
   identifier Int @id @default(autoincrement())
+  name String
 
   NIT String @unique
   REEUP String @unique
