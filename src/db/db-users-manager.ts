@@ -13,6 +13,7 @@ export class DBUsersManager extends PrismaClient {
         })
     }
 
+    //common users
     create(user:{
         name:string,
         last_name:string,
@@ -88,6 +89,41 @@ export class DBUsersManager extends PrismaClient {
         return this.user.delete({
             where,
             select
+        });
+    }
+
+    //superusers
+    setAsSuperUser(identifier: number) {
+        return this.user.update({
+            where: {
+                identifier
+            },
+            data: {
+                isSuperUser: true
+            },
+            select: {
+                identifier: true,
+                email: true,
+                phone: true,
+                isSuperUser: true
+            }
+        });
+    }
+
+    removeSuperUserPrivilegies(identifier: number) {
+        return this.user.update({
+            where: {
+                identifier
+            },
+            data: {
+                isSuperUser: false
+            },
+            select: {
+                identifier: true,
+                email: true,
+                phone: true,
+                isSuperUser: true
+            }
         });
     }
 }

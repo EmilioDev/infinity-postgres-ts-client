@@ -25,6 +25,8 @@ model User {
 
   password_hash String
 
+  isSuperUser Boolean @default(false)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

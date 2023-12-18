@@ -9,7 +9,8 @@ export type UserSelectFields = {
     photo?: boolean,
     password_hash?: boolean,
     createdAt?: boolean,
-    updatedAt?: boolean
+    updatedAt?: boolean,
+    isSuperUser?: boolean
 };
 
 export type ConfigurableUser<T extends UserSelectFields> = {
