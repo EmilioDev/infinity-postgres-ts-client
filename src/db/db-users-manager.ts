@@ -1,5 +1,6 @@
 import { ConfigService } from "@nestjs/config";
 import { PrismaClient } from "@prisma/client";
+import { ConfigurableUser, UserNoIdentifier, UserNotObligatoryIdentifier, UserObligatoryIdentifier, UserSelectFields, UserUniqueFields } from "../types";
 
 export class DBUsersManager extends PrismaClient {
     constructor(config: ConfigService) {
@@ -49,124 +50,44 @@ export class DBUsersManager extends PrismaClient {
     }
 
     findFirst({ where, select } : {
-        where: {
-            identifier?: number,
-            name?: string,
-            last_name?: string,
-            phone?: string,
-            email?: string,
-            country?: string,
-            degrees?: string,
-            photo?: string,
-            password_hash?: string,
-            createdAt?: Date,
-            updatedAt?: Date
-        }, select?: {
-            identifier?: boolean,
-            name?: boolean,
-            last_name?: boolean,
-            phone?: boolean,
-            email?: boolean,
-            country?: boolean,
-            degrees?: boolean,
-            photo?: boolean,
-            password_hash?: boolean,
-            createdAt?: boolean,
-            updatedAt?: boolean
-        }
-    }): Promise<{
-        identifier: number,
-        name: string | null,
-        last_name: string | null,
-        phone: string | null,
-        email: string | null,
-        country: string | null,
-        degrees: string | null,
-        photo: string | null,
-        password_hash: string,
-        createdAt: Date,
-        updatedAt: Date
-    } | any>
+        where: UserNotObligatoryIdentifier, select?: UserSelectFields
+    })
     {
-        if(select) {
-            return new Promise((resolve, reject) => {
-                this.user.findFirst({
-                    where,
-                    select
-                })
-                .then(result => resolve(result))
-                .catch(err => reject(err));
-            });
-        }
-
-        return new Promise<{
-            identifier: number,
-            name: string | null,
-            last_name: string | null,
-            phone: string | null,
-            email: string | null,
-            country: string | null,
-            degrees: string | null,
-            photo: string | null,
-            password_hash: string,
-            createdAt: Date,
-            updatedAt: Date
-        } | any>((resolve, reject) => {
-            this.user.findFirst({
-                where
-            })
-            .then(result => resolve(result))
-            .catch(err => reject(err));
+        return this.user.findFirst({
+            where,
+            select
         });
     }
 
     findUnique({ where, select } : {
-        where: {
-            identifier: number,
-            name?: string,
-            last_name?: string,
-            phone?: string,
-            email?: string,
-            country?: string,
-            degrees?: string,
-            photo?: string,
-            password_hash?: string,
-            createdAt?: Date,
-            updatedAt?: Date
-        }, select?: {
-            identifier?: boolean,
-            name?: boolean,
-            last_name?: boolean,
-            phone?: boolean,
-            email?: boolean,
-            country?: boolean,
-            degrees?: boolean,
-            photo?: boolean,
-            password_hash?: boolean,
-            createdAt?: boolean,
-            updatedAt?: boolean
-        }
-    }): Promise<{
-        identifier: number,
-        name: string | null,
-        last_name: string | null,
-        phone: string | null,
-        email: string | null,
-        country: string | null,
-        degrees: string | null,
-        photo: string | null,
-        password_hash: string,
-        createdAt: Date,
-        updatedAt: Date
-    } | any>
+        where: UserObligatoryIdentifier, select?: UserSelectFields
+    })
     {
-        return new Promise((resolve, reject) => {
-            this.user.findUnique({
-                where,
-                select
-            })
-            .then(result => resolve(result))
-            .catch(err => reject(err));
+        return this.user.findUnique({
+            where,
+            select
+        });
+    }
+
+    update({ where, data, select } : {
+        where: UserUniqueFields,
+        data: UserNoIdentifier,
+        select?: UserSelectFields
+    }) {
+        return this.user.update({
+            where,
+            data,
+            select
+        });
+    }
+
+    delete({ where, select } : {
+        where: UserUniqueFields,
+        select?: UserSelectFields
+    }) {
+        return this.user.delete({
+            where,
+            select
         });
     }
 }
