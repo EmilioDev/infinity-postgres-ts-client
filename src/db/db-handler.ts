@@ -2,7 +2,7 @@ import { ConfigService } from "@nestjs/config";
 import { IUser } from "../dto";
 import { compareSync, genSalt, genSaltSync, hash, hashSync } from "bcrypt";
 import { IsNullEmptyOrWhitespaces, IsValidEmail, IsValidPhoneNumber } from "../helpers";
-import { DBUsersManager } from "./db-users-manager";
+import { DBUsersManager } from "./tables";
 
 
 export class DBClientHandler 

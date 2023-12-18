@@ -1,6 +1,6 @@
 import { ConfigService } from "@nestjs/config";
 import { PrismaClient } from "@prisma/client";
-import { ConfigurableUser, UserNoIdentifier, UserNotObligatoryIdentifier, UserObligatoryIdentifier, UserSelectFields, UserUniqueFields } from "../types";
+import { ConfigurableUser, UserNoIdentifier, UserNotObligatoryIdentifier, UserObligatoryIdentifier, UserSelectFields, UserUniqueFields } from "../../types";
 
 export class DBUsersManager extends PrismaClient {
     constructor(config: ConfigService) {
