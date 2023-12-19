@@ -2,15 +2,27 @@ import { ConfigService } from "@nestjs/config";
 import { IUser } from "../dto";
 import { compareSync, genSalt, genSaltSync, hash, hashSync } from "bcrypt";
 import { IsNullEmptyOrWhitespaces, IsValidEmail, IsValidPhoneNumber } from "../helpers";
-import { DBUsersManager } from "./tables";
+import { DBInstitutionsManager, DBUsersManager } from "./tables";
+import { PrismaClient } from "@prisma/client";
 
 
 export class DBClientHandler 
 {
-    private user:DBUsersManager;
+    private users:DBUsersManager;
+    private institutions:DBInstitutionsManager;
 
     constructor(config: ConfigService, private salt: number = 4) {
-        this.user = new DBUsersManager(config)
+        //this.user = new DBUsersManager(config);
+        const client:PrismaClient = new PrismaClient({
+            datasources: {
+                db: {
+                    url: config.get("DATABASE_URL")
+                }
+            }
+        });
+
+        this.users = new DBUsersManager(client);
+        this.institutions = new DBInstitutionsManager(client);
     }
 
     addUser(user: IUser) {
@@ -54,7 +66,7 @@ export class DBClientHandler
                         return;
                     }
 
-                    var userByMail = await this.user.findFirst({
+                    var userByMail = await this.users.findFirst({
                         where: {
                             email: user.email
                         }
@@ -79,7 +91,7 @@ export class DBClientHandler
                         return;
                     }
 
-                    var userByPhone = await this.user.findFirst({
+                    var userByPhone = await this.users.findFirst({
                         where: {
                             phone: user.phone
                         }
@@ -99,7 +111,7 @@ export class DBClientHandler
                     const salt = genSaltSync(this.salt);
                     const password_hash = hashSync(user.password, salt);
     
-                    const result = await this.user.create({
+                    const result = await this.users.create({
                         ...user,
                         password_hash
                     });
@@ -122,7 +134,7 @@ export class DBClientHandler
     isValidPassword(user:IUser) {
         return new Promise<boolean>(async (resolve, reject) => {
             if(!IsNullEmptyOrWhitespaces(user.email)) {
-                var userByMail = await this.user.findFirst({
+                var userByMail = await this.users.findFirst({
                     where: {
                         email: user.email
                     },
@@ -138,7 +150,7 @@ export class DBClientHandler
             }
 
             if(!IsNullEmptyOrWhitespaces(user.phone)) {
-                var userByPhone = await this.user.findFirst({
+                var userByPhone = await this.users.findFirst({
                     where: {
                         phone: user.phone
                     },
@@ -175,7 +187,7 @@ export class DBClientHandler
                 updatedAt: Date
             } | any
         }>((resolve, reject) => {
-            this.user.findUnique({
+            this.users.findUnique({
                 where: {
                     identifier
                 },
@@ -217,7 +229,7 @@ export class DBClientHandler
                 updatedAt: Date
             } | any
         }>((resolve, reject) => {
-            this.user.findFirst({
+            this.users.findFirst({
                 where: {
                     email
                 },
@@ -259,7 +271,7 @@ export class DBClientHandler
                 updatedAt: Date
             } | any
         }>((resolve, reject) => {
-            this.user.findFirst({
+            this.users.findFirst({
                 where: {
                     phone
                 },

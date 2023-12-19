@@ -1,16 +1,19 @@
-import { ConfigService } from "@nestjs/config";
 import { PrismaClient } from "@prisma/client";
-import { ConfigurableUser, UserNoIdentifier, UserNotObligatoryIdentifier, UserObligatoryIdentifier, UserSelectFields, UserUniqueFields } from "../../types";
+import { 
+    UserNoIdentifier, 
+    UserNotObligatoryIdentifier, 
+    UserObligatoryIdentifier, 
+    UserSelectFields, 
+    UserUniqueFields 
+} from "../../types";
 
-export class DBUsersManager extends PrismaClient {
-    constructor(config: ConfigService) {
-        super({
-            datasources: {
-                db: {
-                    url: config.get("DATABASE_URL")
-                }
-            }
-        })
+export class DBUsersManager {
+    constructor(private usr:PrismaClient){
+        //
+    }
+
+    private get user() {
+        return this.usr.user;
     }
 
     //common users
