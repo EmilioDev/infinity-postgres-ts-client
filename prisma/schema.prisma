@@ -179,7 +179,7 @@ model Evaluation {
 model EvaluationSystem {
   identifier Int @id @default(autoincrement())
 
-  name String
+  name String @unique
   description String?
 
   values EvaluationSystemValue[]
@@ -192,7 +192,7 @@ model EvaluationSystem {
 model EvaluationSystemValue {
   identifier Int @id @default(autoincrement())
 
-  name String
+  name String?
   value Int
   description String?
 
