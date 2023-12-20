@@ -1,28 +1,28 @@
 import { PrismaClient } from "@prisma/client";
-import {
-    MetodologistCreate,
-    MetodologistSelectionableFields,
-    MetodologistNotObligatoryIdentifier,
-    MetodologistObligatoryIdentifier,
-    MetodologistUniquefields
-} from '../../types';
+import { 
+    SubjectCreateData,
+    SubjectSelectionableFields,
+    SubjectNotObligatoryIdentifier,
+    SubjectObligatoryIdentifier 
+} from "../../types";
 
-export class DBMetodologistManager
+
+export class DBSubjectManager
 {
     constructor(private prisma:PrismaClient){
         // :-)
     }
 
     private get data() {
-        return this.prisma.metodologist;
+        return this.prisma.subject;
     }
 
-    create(data: MetodologistCreate) {
+    create(data: SubjectCreateData) {
         return this.data.create({ data });
     }
 
     findFirst({ where, select } : {
-        where: MetodologistNotObligatoryIdentifier, select?: MetodologistSelectionableFields
+        where: SubjectNotObligatoryIdentifier, select?: SubjectSelectionableFields
     })
     {
         return this.data.findFirst({
@@ -32,7 +32,7 @@ export class DBMetodologistManager
     }
 
     findUnique({ where, select } : {
-        where: MetodologistObligatoryIdentifier, select?: MetodologistSelectionableFields
+        where: SubjectObligatoryIdentifier, select?: SubjectSelectionableFields
     })
     {
         return this.data.findUnique({
@@ -41,15 +41,15 @@ export class DBMetodologistManager
         });
     }
 
-    findAll(where?:MetodologistNotObligatoryIdentifier) {
+    findAll(where?:SubjectNotObligatoryIdentifier) {
         return this.data.findMany({
             where
         });
     }
 
     delete({ where, select } : {
-        where: MetodologistUniquefields,
-        select?: MetodologistSelectionableFields
+        where: SubjectObligatoryIdentifier,
+        select?: SubjectSelectionableFields
     }) {
         return this.data.delete({
             where,
