@@ -12,7 +12,7 @@ export class DBUsersManager {
         //
     }
 
-    private get user() {
+    private get data() {
         return this.usr.user;
     }
 
@@ -35,7 +35,7 @@ export class DBUsersManager {
             email: string | null,
             createdAt: Date,
         }>((resolve, reject) => {
-            const result = this.user.create({
+            const result = this.data.create({
                 data: {
                     ...user
                 },
@@ -57,7 +57,7 @@ export class DBUsersManager {
         where: UserNotObligatoryIdentifier, select?: UserSelectFields
     })
     {
-        return this.user.findFirst({
+        return this.data.findFirst({
             where,
             select
         });
@@ -67,9 +67,15 @@ export class DBUsersManager {
         where: UserObligatoryIdentifier, select?: UserSelectFields
     })
     {
-        return this.user.findUnique({
+        return this.data.findUnique({
             where,
             select
+        });
+    }
+
+    findAll(where?:UserNotObligatoryIdentifier) {
+        return this.data.findMany({
+            where
         });
     }
 
@@ -78,7 +84,7 @@ export class DBUsersManager {
         data: UserNoIdentifier,
         select?: UserSelectFields
     }) {
-        return this.user.update({
+        return this.data.update({
             where,
             data,
             select
@@ -89,7 +95,7 @@ export class DBUsersManager {
         where: UserUniqueFields,
         select?: UserSelectFields
     }) {
-        return this.user.delete({
+        return this.data.delete({
             where,
             select
         });
@@ -97,7 +103,7 @@ export class DBUsersManager {
 
     //superusers
     setAsSuperUser(identifier: number) {
-        return this.user.update({
+        return this.data.update({
             where: {
                 identifier
             },
@@ -114,7 +120,7 @@ export class DBUsersManager {
     }
 
     removeSuperUserPrivilegies(identifier: number) {
-        return this.user.update({
+        return this.data.update({
             where: {
                 identifier
             },

@@ -47,6 +47,10 @@ export class DBEvaluationSystemManager
         });
     }
 
+    findAll(where?:EvaluationSystemIdentifierNotObligatory) {
+        return this.data.findMany({ where });
+    }
+
     update({ where, data, select } : 
         {
             where: EvaluationSystemIdentifierFields,

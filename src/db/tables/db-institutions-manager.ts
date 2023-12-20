@@ -47,6 +47,10 @@ export class DBInstitutionsManager
         });
     }
 
+    findAll(where?:InstitutionIdentifierNotObligatory) {
+        return this.data.findMany({ where });
+    }
+
     update({ where, data, select } : 
         {
             where: InstitutionIdentifierFields,
