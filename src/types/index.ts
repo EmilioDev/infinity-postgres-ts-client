@@ -4,3 +4,6 @@ export * from './metodologist.types';
 export * from './subject.types';
 export * from './resource.types';
 export * from './resource-template.types'
+export * from './teacher.types';
+export * from './student.types';
+export  * from './evaluation.types';
