@@ -1,30 +1,97 @@
 import { ConfigService } from "@nestjs/config";
 import { IUser } from "../dto";
+import { PrismaClient } from "@prisma/client";
 import { compareSync, genSalt, genSaltSync, hash, hashSync } from "bcrypt";
 import { IsNullEmptyOrWhitespaces, IsValidEmail, IsValidPhoneNumber } from "../helpers";
-import { DBInstitutionsManager, DBUsersManager } from "./tables";
-import { PrismaClient } from "@prisma/client";
+import { 
+    DBInstitutionsManager, 
+    DBUsersManager,
+    DBEvaluationManager,
+    DBMetodologistManager,
+    DBResourceTemplateManager,
+    DBResourcesManager,
+    DBStudentManager,
+    DBSubjectManager,
+    DBTeacherManager 
+} from "./tables";
 
 
-export class DBClientHandler 
+export class DBClientHandler
 {
-    private users:DBUsersManager;
-    private institutions:DBInstitutionsManager;
+    private _users:DBUsersManager;
+    private _institutions:DBInstitutionsManager;
+    private _evaluations: DBEvaluationManager;
+    private _metodologists:DBMetodologistManager;
+    private _resourcesTemplates:DBResourceTemplateManager;
+    private _resources:DBResourcesManager;
+    private _students:DBStudentManager;
+    private _subjects:DBSubjectManager;
+    private _teachers:DBTeacherManager;
+
+    private client:PrismaClient;
 
     constructor(config: ConfigService, private salt: number = 4) {
-        //this.user = new DBUsersManager(config);
-        const client:PrismaClient = new PrismaClient({
+        //super('');
+
+        this.client = new PrismaClient({
             datasources: {
                 db: {
                     url: config.get("DATABASE_URL")
                 }
             }
         });
+        
+        this._users = new DBUsersManager(this.client);
+        this._institutions = new DBInstitutionsManager(this.client);
+        this._evaluations = new DBEvaluationManager(this.client);
+        this._metodologists = new DBMetodologistManager(this.client);
+        this._resourcesTemplates = new DBResourceTemplateManager(this.client);
+        this._resources = new DBResourcesManager(this.client);
+        this._students = new DBStudentManager(this.client);
+        this._subjects = new DBSubjectManager(this.client);
+        this._teachers = new DBTeacherManager(this.client);
 
-        this.users = new DBUsersManager(client);
-        this.institutions = new DBInstitutionsManager(client);
+        this.initialize();
     }
 
+    //gets
+    get Users() {
+        return this._users;
+    }
+
+    get Institutions() {
+        return this._institutions;
+    }
+
+    get Evaluations() {
+        return this._evaluations;
+    }
+
+    get Metodologists() {
+        return this._metodologists;
+    }
+
+    get ResourcesTemplates() {
+        return this._resourcesTemplates;
+    }
+
+    get Resources() {
+        return this._resources;
+    }
+
+    get Students() {
+        return this._students;
+    }
+
+    get Subjects() {
+        return this._subjects;
+    }
+
+    get Teachers() {
+        return this._teachers;
+    }
+ 
+    //methods
     addUser(user: IUser) {
         return new Promise<{
             code: number,
@@ -66,7 +133,7 @@ export class DBClientHandler
                         return;
                     }
 
-                    var userByMail = await this.users.findFirst({
+                    var userByMail = await this._users.findFirst({
                         where: {
                             email: user.email
                         }
@@ -91,7 +158,7 @@ export class DBClientHandler
                         return;
                     }
 
-                    var userByPhone = await this.users.findFirst({
+                    var userByPhone = await this._users.findFirst({
                         where: {
                             phone: user.phone
                         }
@@ -111,7 +178,7 @@ export class DBClientHandler
                     const salt = genSaltSync(this.salt);
                     const password_hash = hashSync(user.password, salt);
     
-                    const result = await this.users.create({
+                    const result = await this._users.create({
                         ...user,
                         password_hash
                     });
@@ -134,7 +201,7 @@ export class DBClientHandler
     isValidPassword(user:IUser) {
         return new Promise<boolean>(async (resolve, reject) => {
             if(!IsNullEmptyOrWhitespaces(user.email)) {
-                var userByMail = await this.users.findFirst({
+                var userByMail = await this._users.findFirst({
                     where: {
                         email: user.email
                     },
@@ -150,7 +217,7 @@ export class DBClientHandler
             }
 
             if(!IsNullEmptyOrWhitespaces(user.phone)) {
-                var userByPhone = await this.users.findFirst({
+                var userByPhone = await this._users.findFirst({
                     where: {
                         phone: user.phone
                     },
@@ -187,7 +254,7 @@ export class DBClientHandler
                 updatedAt: Date
             } | any
         }>((resolve, reject) => {
-            this.users.findUnique({
+            this._users.findUnique({
                 where: {
                     identifier
                 },
@@ -229,7 +296,7 @@ export class DBClientHandler
                 updatedAt: Date
             } | any
         }>((resolve, reject) => {
-            this.users.findFirst({
+            this._users.findFirst({
                 where: {
                     email
                 },
@@ -271,7 +338,7 @@ export class DBClientHandler
                 updatedAt: Date
             } | any
         }>((resolve, reject) => {
-            this.users.findFirst({
+            this._users.findFirst({
                 where: {
                     phone
                 },
@@ -324,5 +391,9 @@ export class DBClientHandler
         }>((resolve, reject) => {
             //
         })
+    }
+
+    private initialize() {
+        //
     }
 }
