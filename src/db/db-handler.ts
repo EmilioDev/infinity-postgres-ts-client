@@ -40,7 +40,7 @@ export class DBClientHandler
                 }
             }
         });
-        
+
         this._users = new DBUsersManager(this.client);
         this._institutions = new DBInstitutionsManager(this.client);
         this._evaluations = new DBEvaluationManager(this.client);
@@ -50,8 +50,6 @@ export class DBClientHandler
         this._students = new DBStudentManager(this.client);
         this._subjects = new DBSubjectManager(this.client);
         this._teachers = new DBTeacherManager(this.client);
-
-        this.initialize();
     }
 
     //gets
@@ -393,7 +391,11 @@ export class DBClientHandler
         })
     }
 
-    private initialize() {
-        //
+    async connect() {
+        await this.client.$connect();
+    }
+
+    async disconnect() {
+        await this.client.$disconnect();
     }
 }
