@@ -20,7 +20,6 @@ export type CreateInstitutionType = {
     website?: string,
     address?: string,
     rector: number,
-    evaluativeSchemeUsed: number,
     description?: string,
     logo?: string
 }
