@@ -14,7 +14,7 @@ datasource db {
 model User {
   identifier Int @id @default(autoincrement())
 
-  name String
+  name String?
   last_name String?
 
   phone String?
@@ -24,6 +24,8 @@ model User {
   photo String?
 
   password_hash String
+
+  isSuperUser Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -41,13 +43,15 @@ model User {
 model Institution {
   identifier Int @id @default(autoincrement())
 
+  name String
+  description String?
+  logo String?
+
   NIT String @unique
   REEUP String @unique
 
   website String?
   address String?
-
-  evaluativeSchemeUsed String @default("1;2;3;4;5")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -85,7 +89,7 @@ model Subject {
   identifier Int @id @default(autoincrement())
 
   name String
-  grade Int @default(1)//this is for the year where this subject is imparted
+  year Int @default(1)//this is for the year where this subject is imparted
   description String?
 
   createdAt DateTime @default(now())
@@ -106,15 +110,35 @@ model Subject {
 model Resource {
   identifier Int @id @default(autoincrement())
 
-  name String
+  name String?
   description String?
   photo String?
   requiresOnline Boolean @default(false)
-  evaluation Int @default(0)
+  evaluation Float @default(0)//the evaluation given by metodologists
 
-  data Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  resourceTemplateId Int
+  template ResourceTemplate @relation(fields: [resourceTemplateId], references: [identifier])
+
+  templateCustomValues Json?
 
   @@map("resources")
+}
+
+model ResourceTemplate {
+  identifier Int @id @default(autoincrement())
+  
+  content Json?
+  templateName String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  resources Resource[]
+
+  @@map("resourceTemplates")
 }
 
 //teachers
@@ -157,10 +181,12 @@ model Student {
 model Evaluation {
   identifier Int @id @default(autoincrement())
 
-  valueId Int
-  value EvaluationSystemValue @relation(fields: [valueId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
-  evaluationName String?
+  value Float
+  evaluationName String? //you put here the name of the tests that generated this evaluation
   isFinal Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   studentId Int
   student Student @relation(fields: [studentId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
@@ -168,30 +194,3 @@ model Evaluation {
   @@map("evaluations")
 }
 
-//evaluation systems, because there are many of them
-model EvaluationSystem {
-  identifier Int @id @default(autoincrement())
-
-  name String
-  description String?
-
-  values EvaluationSystemValue[]
-
-  @@map("evaluationSystems")
-}
-
-//possible values of each evaluation system
-model EvaluationSystemValue {
-  identifier Int @id @default(autoincrement())
-
-  name String
-  value Int
-  description String?
-
-  studentsEvaluations Evaluation[]
-
-  systemId Int
-  system EvaluationSystem @relation(fields: [systemId], references: [identifier], onDelete: Cascade, onUpdate: Cascade)
-
-  @@map("evaluationSystemValues")
-}
