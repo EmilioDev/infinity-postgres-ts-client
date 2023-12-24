@@ -11,10 +11,6 @@ export function CheckIfStringIsHash(candidate:string, hashed:string): Promise<bo
 {
     return new Promise<boolean>(async(response, reject) => {
         try{
-            compare(candidate, hashed)
-                .then(result => {
-                    //
-                })
             const areEqual:boolean = await compare(candidate, hashed);
             response(areEqual);
         }

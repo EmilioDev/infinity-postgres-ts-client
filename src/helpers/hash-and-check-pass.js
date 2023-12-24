@@ -22,10 +22,6 @@ exports.HashString = HashString;
 function CheckIfStringIsHash(candidate, hashed) {
     return new Promise((response, reject) => __awaiter(this, void 0, void 0, function* () {
         try {
-            (0, bcrypt_1.compare)(candidate, hashed)
-                .then(result => {
-                //
-            });
             const areEqual = yield (0, bcrypt_1.compare)(candidate, hashed);
             response(areEqual);
         }
