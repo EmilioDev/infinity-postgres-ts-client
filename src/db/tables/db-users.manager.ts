@@ -22,9 +22,9 @@ export class DBUsersManager {
         last_name:string,
         phone:string,
         email:string,
-        country:string,
-        degrees:string,
-        photo:string,
+        country?:string,
+        degrees?:string,
+        photo?:string,
         password_hash:string
     }) {
         return new Promise<{
