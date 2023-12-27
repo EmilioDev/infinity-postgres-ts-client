@@ -13,6 +13,18 @@ export type UserSelectFields = {
     isSuperUser?: boolean
 };
 
+export type UserCreateData = {
+    password_hash:string,
+    name?:string,
+    last_name?:string,
+    phone?:string,
+    email?:string,
+    country?:string,
+    degrees?:string,
+    photo?:string,
+    isSuperUser?: boolean
+}
+
 export type ConfigurableUser<T extends UserSelectFields> = {
     identifier?: T['identifier'] extends true ? number : never,
     name?: T['name'] extends true ? string : never,

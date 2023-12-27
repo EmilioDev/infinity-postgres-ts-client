@@ -22,14 +22,16 @@ describe('testing the users storage procedures', () => {
 
     it('should create an user without any asosciation', async () => {
         var user = await users.create({
-            name: 'name',
-            last_name: 'last name',
-            phone: '59806403',
-            email: 'hell@inferno.com',
-            country: 'hell',
-            degrees: 'murder',
-            photo: 'the-infernal-photo.png',
-            password_hash: 'a-very-powerfull-and-secure-hash'
+            data: {
+                name: 'name',
+                last_name: 'last name',
+                phone: '59806403',
+                email: 'hell@inferno.com',
+                country: 'hell',
+                degrees: 'murder',
+                photo: 'the-infernal-photo.png',
+                password_hash: 'a-very-powerfull-and-secure-hash'
+            }
         });
 
         expect(user.email).toBe('hell@inferno.com');

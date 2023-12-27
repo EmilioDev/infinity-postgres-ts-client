@@ -29,14 +29,16 @@ describe('testing the institution storages procedure', () => {
     }));
     it('should create an institution with its rector', () => __awaiter(void 0, void 0, void 0, function* () {
         var user = yield users.create({
-            name: 'name',
-            last_name: 'last name',
-            phone: '59806403',
-            email: 'hell2@inferno.com',
-            country: 'hell',
-            degrees: 'murder',
-            photo: 'the-infernal-photo.png',
-            password_hash: 'another-very-powerfull-and-secure-hash'
+            data: {
+                name: 'name',
+                last_name: 'last name',
+                phone: '59806403',
+                email: 'hell2@inferno.com',
+                country: 'hell',
+                degrees: 'murder',
+                photo: 'the-infernal-photo.png',
+                password_hash: 'another-very-powerfull-and-secure-hash'
+            }
         });
         const institution = yield institutions.create({
             name: 'the institution',

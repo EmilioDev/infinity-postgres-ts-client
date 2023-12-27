@@ -4,7 +4,8 @@ import {
     UserNotObligatoryIdentifier, 
     UserObligatoryIdentifier, 
     UserSelectFields, 
-    UserUniqueFields 
+    UserUniqueFields,
+    UserCreateData 
 } from "../../types";
 
 export class DBUsersManager {
@@ -17,40 +18,9 @@ export class DBUsersManager {
     }
 
     //common users
-    create(user:{
-        name:string,
-        last_name:string,
-        phone:string,
-        email:string,
-        country?:string,
-        degrees?:string,
-        photo?:string,
-        password_hash:string
-    }) {
-        return new Promise<{
-            identifier: number,
-            name: string | null,
-            last_name: string | null,
-            phone: string | null,
-            email: string | null,
-            createdAt: Date,
-        }>((resolve, reject) => {
-            const result = this.data.create({
-                data: {
-                    ...user
-                },
-                select: {
-                    identifier: true,
-                    name: true,
-                    last_name: true,
-                    phone: true,
-                    email: true,
-                    createdAt: true
-                }
-            })
-            .then(result => resolve(result))
-            .catch(err => reject(err));
-        });
+    create({ data, select } : { data: UserCreateData, select?: UserSelectFields })
+    {
+        return this.data.create({ data, select });
     }
 
     findFirst({ where, select } : {

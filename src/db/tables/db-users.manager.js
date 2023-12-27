@@ -10,22 +10,8 @@ class DBUsersManager {
         return this.usr.user;
     }
     //common users
-    create(user) {
-        return new Promise((resolve, reject) => {
-            const result = this.data.create({
-                data: Object.assign({}, user),
-                select: {
-                    identifier: true,
-                    name: true,
-                    last_name: true,
-                    phone: true,
-                    email: true,
-                    createdAt: true
-                }
-            })
-                .then(result => resolve(result))
-                .catch(err => reject(err));
-        });
+    create({ data, select }) {
+        return this.data.create({ data, select });
     }
     findFirst({ where, select }) {
         return this.data.findFirst({
