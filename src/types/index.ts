@@ -7,3 +7,4 @@ export * from './resource-template.types'
 export * from './teacher.types';
 export * from './student.types';
 export  * from './evaluation.types';
+export * from './cache-data.types';
