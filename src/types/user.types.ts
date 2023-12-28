@@ -50,7 +50,8 @@ export type UserObligatoryIdentifier = {
     photo?: string,
     password_hash?: string,
     createdAt?: Date,
-    updatedAt?: Date
+    updatedAt?: Date,
+    isSuperUser?: boolean
 };
 
 export type UserObligatoryIdentifierNoPassword = {
@@ -63,7 +64,8 @@ export type UserObligatoryIdentifierNoPassword = {
     degrees?: string,
     photo?: string,
     createdAt?: Date,
-    updatedAt?: Date
+    updatedAt?: Date,
+    isSuperUser?: boolean
 };
 
 export type UserNotObligatoryIdentifier = {
@@ -77,7 +79,8 @@ export type UserNotObligatoryIdentifier = {
     photo?: string,
     password_hash?: string,
     createdAt?: Date,
-    updatedAt?: Date
+    updatedAt?: Date,
+    isSuperUser?: boolean
 };
 
 export type UserNoIdentifier = {
@@ -88,7 +91,8 @@ export type UserNoIdentifier = {
     country?: string,
     degrees?: string,
     photo?: string,
-    password_hash?: string
+    password_hash?: string,
+    isSuperUser?: boolean
 };
 
 export type UserUniqueFields = {
