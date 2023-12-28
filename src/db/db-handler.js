@@ -13,13 +13,11 @@ exports.DBClientHandler = void 0;
 const client_1 = require("@prisma/client");
 const tables_1 = require("./tables");
 class DBClientHandler {
-    constructor(config, salt = 4) {
-        //super('');
-        this.salt = salt;
+    constructor(dbUrl) {
         this.client = new client_1.PrismaClient({
             datasources: {
                 db: {
-                    url: config.get("DATABASE_URL")
+                    url: dbUrl
                 }
             }
         });

@@ -23,3 +23,4 @@ __exportStar(require("./resource-template.types"), exports);
 __exportStar(require("./teacher.types"), exports);
 __exportStar(require("./student.types"), exports);
 __exportStar(require("./evaluation.types"), exports);
+__exportStar(require("./cache-data.types"), exports);

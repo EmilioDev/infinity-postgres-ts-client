@@ -1,8 +1,4 @@
-import { ConfigService } from "@nestjs/config";
-import { IUser } from "../dto";
 import { PrismaClient } from "@prisma/client";
-import { compareSync, genSalt, genSaltSync, hash, hashSync } from "bcrypt";
-import { IsNullEmptyOrWhitespaces, IsValidEmail, IsValidPhoneNumber } from "../helpers";
 import { 
     DBInstitutionsManager, 
     DBUsersManager,
@@ -30,13 +26,11 @@ export class DBClientHandler
 
     private client:PrismaClient;
 
-    constructor(config: ConfigService, private salt: number = 4) {
-        //super('');
-
+    constructor(dbUrl:string) {
         this.client = new PrismaClient({
             datasources: {
                 db: {
-                    url: config.get("DATABASE_URL")
+                    url: dbUrl
                 }
             }
         });
