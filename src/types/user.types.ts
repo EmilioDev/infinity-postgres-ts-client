@@ -53,6 +53,19 @@ export type UserObligatoryIdentifier = {
     updatedAt?: Date
 };
 
+export type UserObligatoryIdentifierNoPassword = {
+    identifier: number,
+    name?: string,
+    last_name?: string,
+    phone?: string,
+    email?: string,
+    country?: string,
+    degrees?: string,
+    photo?: string,
+    createdAt?: Date,
+    updatedAt?: Date
+};
+
 export type UserNotObligatoryIdentifier = {
     identifier?: number,
     name?: string,
