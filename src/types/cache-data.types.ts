@@ -1,15 +1,11 @@
-import { InstitutionIdentifierObligatory } from "./institution.types";
-import { MetodologistObligatoryIdentifier } from "./metodologist.types";
-import { StudentIdentifierObligatory } from "./student.types";
-import { TeacherIdentifierObligatory } from "./teacher.types";
 import { UserObligatoryIdentifierNoPassword } from "./user.types";
 
 export class CacheData {
     public user: UserObligatoryIdentifierNoPassword;
-    public institutionsManaged: InstitutionIdentifierObligatory[];
-    public metodologistIn: MetodologistObligatoryIdentifier[];
-    public teacherIn: TeacherIdentifierObligatory[];
-    public studentIn: StudentIdentifierObligatory[];
+    public institutionsManaged: IdentifierOnlyType[];
+    public metodologistIn: IdentifierOnlyType[];
+    public teacherIn: IdentifierOnlyType[];
+    public studentIn: IdentifierOnlyType[];
 
     constructor() {
         this.institutionsManaged = [];
@@ -18,43 +14,47 @@ export class CacheData {
         this.studentIn = [];
     }
 
-    addInstitution(institution:InstitutionIdentifierObligatory) {
+    addInstitution(institution:IdentifierOnlyType) {
         this.institutionsManaged.push(institution);
         return this;
     }
 
-    addInstitutions(institutions:InstitutionIdentifierObligatory[]) {
+    addInstitutions(institutions:IdentifierOnlyType[]) {
         this.institutionsManaged.push(...institutions);
         return this;
     }
 
-    addMetodologist(metodologist: MetodologistObligatoryIdentifier) {
+    addMetodologist(metodologist: IdentifierOnlyType) {
         this.metodologistIn.push(metodologist);
         return this;
     }
 
-    addMetodologists(metodologist: MetodologistObligatoryIdentifier[]) {
-        this.metodologistIn.push(...metodologist);
+    addMetodologists(metodologists: IdentifierOnlyType[]) {
+        this.metodologistIn.push(...metodologists);
         return this;
     }
 
-    addTeacher(teacher: TeacherIdentifierObligatory) {
+    addTeacher(teacher: IdentifierOnlyType) {
         this.teacherIn.push(teacher);
         return this;
     }
 
-    addTeachers(teacher: TeacherIdentifierObligatory[]) {
-        this.teacherIn.push(...teacher);
+    addTeachers(teachers: IdentifierOnlyType[]) {
+        this.teacherIn.push(...teachers);
         return this;
     }
 
-    addStudent(student:StudentIdentifierObligatory) {
+    addStudent(student:IdentifierOnlyType) {
         this.studentIn.push(student);
         return this;
     }
 
-    addStudents(student:StudentIdentifierObligatory[]) {
-        this.studentIn.push(...student);
+    addStudents(students:IdentifierOnlyType[]) {
+        this.studentIn.push(...students);
         return this;
     }
+}
+
+export type IdentifierOnlyType = {
+    identifier: number
 }

@@ -20,24 +20,24 @@ class CacheData {
         this.metodologistIn.push(metodologist);
         return this;
     }
-    addMetodologists(metodologist) {
-        this.metodologistIn.push(...metodologist);
+    addMetodologists(metodologists) {
+        this.metodologistIn.push(...metodologists);
         return this;
     }
     addTeacher(teacher) {
         this.teacherIn.push(teacher);
         return this;
     }
-    addTeachers(teacher) {
-        this.teacherIn.push(...teacher);
+    addTeachers(teachers) {
+        this.teacherIn.push(...teachers);
         return this;
     }
     addStudent(student) {
         this.studentIn.push(student);
         return this;
     }
-    addStudents(student) {
-        this.studentIn.push(...student);
+    addStudents(students) {
+        this.studentIn.push(...students);
         return this;
     }
 }
