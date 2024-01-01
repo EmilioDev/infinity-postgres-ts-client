@@ -14,6 +14,11 @@ export class CacheData {
         this.studentIn = [];
     }
 
+    setUserData(usr:UserObligatoryIdentifierNoPassword) {
+        this.user = usr;
+        return this;
+    }
+
     addInstitution(institution:IdentifierOnlyType) {
         this.institutionsManaged.push(institution);
         return this;

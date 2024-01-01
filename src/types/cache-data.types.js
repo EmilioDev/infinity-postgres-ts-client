@@ -8,6 +8,10 @@ class CacheData {
         this.teacherIn = [];
         this.studentIn = [];
     }
+    setUserData(usr) {
+        this.user = usr;
+        return this;
+    }
     addInstitution(institution) {
         this.institutionsManaged.push(institution);
         return this;
