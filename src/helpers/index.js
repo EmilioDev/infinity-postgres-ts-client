@@ -18,3 +18,4 @@ __exportStar(require("./null-empty-or-whitespaces"), exports);
 __exportStar(require("./is-valid-email"), exports);
 __exportStar(require("./is-valid-phone"), exports);
 __exportStar(require("./get-prisma-client"), exports);
+__exportStar(require("./hash-and-check-pass"), exports);

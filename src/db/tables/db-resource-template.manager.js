@@ -36,5 +36,12 @@ class DBResourceTemplateManager {
             select
         });
     }
+    clean() {
+        return new Promise((resolve, reject) => {
+            this.data.deleteMany()
+                .then(data => resolve())
+                .catch(err => reject(err));
+        });
+    }
 }
 exports.DBResourceTemplateManager = DBResourceTemplateManager;
