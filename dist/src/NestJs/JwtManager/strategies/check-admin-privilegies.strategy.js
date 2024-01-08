@@ -12,13 +12,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BasicJwtStrategy = void 0;
+exports.CheckAdminPrivilegiesStrategy = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const passport_1 = require("@nestjs/passport");
 const passport_jwt_1 = require("passport-jwt");
 const interfaces_1 = require("../../../interfaces");
-let BasicJwtStrategy = class BasicJwtStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, 'jwt') {
+let CheckAdminPrivilegiesStrategy = class CheckAdminPrivilegiesStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, 'jwt-admin') {
     constructor(config, sessionsManager) {
         super({
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -30,12 +30,16 @@ let BasicJwtStrategy = class BasicJwtStrategy extends (0, passport_1.PassportStr
     validate(payload) {
         return new Promise(async (resolve, reject) => {
             const { key } = payload;
-            if (!key) {
+            if (!key) { //no key
                 reject(new common_1.UnauthorizedException('you are not authorized to acces this endpoint'));
                 return;
             }
             const data = await this.sessionsManager.getData(key);
-            if (!data) {
+            if (!data) { //his data is not stored
+                reject(new common_1.UnauthorizedException('you are not authorized to acces this endpoint'));
+                return;
+            }
+            if (!data.user || !data.user.isSuperUser) { //it is not an admin
                 reject(new common_1.UnauthorizedException('you are not authorized to acces this endpoint'));
                 return;
             }
@@ -43,9 +47,9 @@ let BasicJwtStrategy = class BasicJwtStrategy extends (0, passport_1.PassportStr
         });
     }
 };
-exports.BasicJwtStrategy = BasicJwtStrategy;
-exports.BasicJwtStrategy = BasicJwtStrategy = __decorate([
+exports.CheckAdminPrivilegiesStrategy = CheckAdminPrivilegiesStrategy;
+exports.CheckAdminPrivilegiesStrategy = CheckAdminPrivilegiesStrategy = __decorate([
     (0, common_1.Injectable)(),
     __param(1, (0, common_1.Inject)(interfaces_1.SESSIONS_SERVICE)),
     __metadata("design:paramtypes", [config_1.ConfigService, Object])
-], BasicJwtStrategy);
+], CheckAdminPrivilegiesStrategy);

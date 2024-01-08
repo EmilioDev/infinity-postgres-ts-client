@@ -15,3 +15,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./simple-jwt.guard"), exports);
+__exportStar(require("./check-admin-privilegies.guard"), exports);

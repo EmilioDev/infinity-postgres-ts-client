@@ -5,9 +5,9 @@ import { ExtractJwt, Strategy } from "passport-jwt";
 import { ISessionsService, SESSIONS_SERVICE } from "../../../interfaces";
 import { CacheData } from "../../../types";
 
+
 @Injectable()
-export class BasicJwtStrategy extends PassportStrategy(Strategy, 'jwt')
-{
+export class CheckAdminPrivilegiesStrategy extends PassportStrategy(Strategy, 'jwt-admin') {
     constructor(config: ConfigService, @Inject(SESSIONS_SERVICE) private sessionsManager: ISessionsService){
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -20,14 +20,19 @@ export class BasicJwtStrategy extends PassportStrategy(Strategy, 'jwt')
         return new Promise<CacheData>(async(resolve, reject) => {
             const { key }:{ key:string } = payload;
 
-            if(!key) {
+            if(!key) {//no key
                 reject(new UnauthorizedException('you are not authorized to acces this endpoint'));
                 return;
             }
 
             const data = await this.sessionsManager.getData(key);
 
-            if(!data) {
+            if(!data) {//his data is not stored
+                reject(new UnauthorizedException('you are not authorized to acces this endpoint'));
+                return;
+            }
+
+            if(!data.user || !data.user.isSuperUser) {//it is not an admin
                 reject(new UnauthorizedException('you are not authorized to acces this endpoint'));
                 return;
             }
@@ -36,4 +41,3 @@ export class BasicJwtStrategy extends PassportStrategy(Strategy, 'jwt')
         });
     }
 }
-
