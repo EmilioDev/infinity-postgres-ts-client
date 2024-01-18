@@ -1,16 +1,61 @@
 version: '3.8'
+
 services:
-  postgres:
-    image: postgres:15-alpine3.18
-    container_name: infinity-testing-postgres-db
+  roach-0:
+    image: cockroachdb/cockroach:v23.1.13
+    container_name: roach-0
     ports:
-      - 5433:5432
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: infinity_db
+      - '26257:26257'
+      - '4500:8080'
+    command: start --insecure --advertise-addr=roach-0:26257 --listen-addr=roach-0:26257 --join=roach-0:26257,roach-1:26257,roach-2:26257 --logtostderr=WARNING --log-file-verbosity=WARNING
+    #start-single-node --insecure 
+    volumes:
+      - "../../main/files/db/cockroach/crdb-0:/cockroach/cockroach-data"
     networks:
-      - infinity-network-2
+      infinity-network-2:
+        aliases: 
+          - roach-0
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - COCKROACH_DATABASE=infinityDB
+
+  roach-1:
+    image: cockroachdb/cockroach:v23.1.13
+    container_name: roach-1
+    command: start --insecure --advertise-addr=roach-1:26257 --listen-addr=roach-1:26257 --join=roach-0:26257,roach-1:26257,roach-2:26257 --logtostderr=WARNING --log-file-verbosity=WARNING
+    ports:
+      - '26257'
+    volumes:
+      - "../../main/files/db/cockroach/crdb-1:/cockroach/cockroach-data"
+    networks:
+      infinity-network-2:
+        aliases: 
+          - roach-1
+    depends_on:
+      - roach-0
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - COCKROACH_DATABASE=infinityDB
+
+  roach-2:
+    image: cockroachdb/cockroach:v23.1.13
+    container_name: roach-2
+    command: start --insecure --advertise-addr=roach-2:26257 --listen-addr=roach-2:26257 --join=roach-0:26257,roach-1:26257,roach-2:26257 --logtostderr=WARNING --log-file-verbosity=WARNING
+    ports:
+      - '26257'
+    volumes:
+      - "../../main/files/db/cockroach/crdb-2:/cockroach/cockroach-data"
+    networks:
+      infinity-network-2:
+        aliases: 
+          - roach-2
+    depends_on:
+      - roach-0
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - COCKROACH_DATABASE=infinityDB
 
 networks:
   infinity-network-2:
+    driver: bridge
+

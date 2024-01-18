@@ -6,7 +6,7 @@ import { ISessionsService, SESSIONS_SERVICE } from "../../../interfaces";
 import { CacheData } from "../../../types";
 
 @Injectable()
-export class BasicJwtStrategy extends PassportStrategy(Strategy, 'jwt')
+export class BasicJwtStrategy extends PassportStrategy(Strategy, 'jwt-admin')
 {
     constructor(config: ConfigService, @Inject(SESSIONS_SERVICE) private sessionsManager: ISessionsService){
         super({
