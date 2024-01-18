@@ -9,7 +9,7 @@ datasource db {
 
 //basic data of all users
 model User {
-  identifier BigInt @id @default(autoincrement())
+  identifier BigInt @id @default(autoincrement()) @unique
 
   name String?
   last_name String?
@@ -38,7 +38,7 @@ model User {
 
 //institutions
 model Institution {
-  identifier BigInt @id @default(autoincrement())
+  identifier BigInt @id @default(autoincrement()) @unique
 
   name String
   description String?
@@ -66,7 +66,7 @@ model Institution {
 //validar repeticiones
 //the metodologist
 model Metodologist {
-  identifier BigInt @id @default(autoincrement())
+  identifier BigInt @id @default(autoincrement()) @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -83,7 +83,7 @@ model Metodologist {
 
 //also known as subject, course, asignatura...
 model Subject {
-  identifier BigInt @id @default(autoincrement())
+  identifier BigInt @id @default(autoincrement()) @unique
 
   name String
   year Int @default(1)//this is for the year where this subject is imparted
@@ -105,7 +105,7 @@ model Subject {
 
 //exercises of each subject
 model Resource {
-  identifier BigInt @id @default(autoincrement())
+  identifier BigInt @id @default(autoincrement()) @unique
 
   name String?
   description String?
@@ -125,7 +125,7 @@ model Resource {
 }
 
 model ResourceTemplate {
-  identifier BigInt @id @default(autoincrement())
+  identifier BigInt @id @default(autoincrement()) @unique
   
   content Json?
   templateName String?
@@ -140,7 +140,7 @@ model ResourceTemplate {
 
 //teachers
 model Teacher {
-  identifier BigInt @id @default(autoincrement())
+  identifier BigInt @id @default(autoincrement()) @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -156,7 +156,7 @@ model Teacher {
 
 //students
 model Student {
-  identifier BigInt @id @default(autoincrement())
+  identifier BigInt @id @default(autoincrement()) @unique
 
   pendingApproval Boolean @default(true)
 
@@ -176,7 +176,7 @@ model Student {
 
 //evaluations
 model Evaluation {
-  identifier BigInt @id @default(autoincrement())
+  identifier BigInt @id @default(autoincrement()) @unique
 
   value Float
   evaluationName String? //you put here the name of the tests that generated this evaluation

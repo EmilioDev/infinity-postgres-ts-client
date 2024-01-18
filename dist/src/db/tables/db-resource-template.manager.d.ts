@@ -5,7 +5,7 @@ export declare class DBResourceTemplateManager {
     constructor(prisma: PrismaClient);
     private get data();
     create(data: ResourceTemplateCreateData): import(".prisma/client").Prisma.Prisma__ResourceTemplateClient<{
-        identifier: number;
+        identifier: bigint;
         content: import(".prisma/client").Prisma.JsonValue;
         templateName: string;
         createdAt: Date;
@@ -15,7 +15,7 @@ export declare class DBResourceTemplateManager {
         where: ResourceTemplateNotObligatoryIdentifier;
         select?: ResourceTemplateSeleccionableFields;
     }): import(".prisma/client").Prisma.Prisma__ResourceTemplateClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
         content: import(".prisma/client").Prisma.JsonValue;
@@ -25,14 +25,14 @@ export declare class DBResourceTemplateManager {
         where: ResourceTemplateObligatoryIdentifier;
         select?: ResourceTemplateSeleccionableFields;
     }): import(".prisma/client").Prisma.Prisma__ResourceTemplateClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
         content: import(".prisma/client").Prisma.JsonValue;
         templateName: string;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(where?: ResourceTemplateNotObligatoryIdentifier, select?: ResourceTemplateSeleccionableFields): import(".prisma/client").Prisma.PrismaPromise<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
         content: import(".prisma/client").Prisma.JsonValue;
@@ -42,7 +42,7 @@ export declare class DBResourceTemplateManager {
         where: ResourceTemplateObligatoryIdentifier;
         select?: ResourceTemplateSeleccionableFields;
     }): import(".prisma/client").Prisma.Prisma__ResourceTemplateClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
         content: import(".prisma/client").Prisma.JsonValue;

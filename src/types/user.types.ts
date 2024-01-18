@@ -40,7 +40,7 @@ export type ConfigurableUser<T extends UserSelectFields> = {
 };
 
 export type UserObligatoryIdentifier = {
-    identifier: number,
+    identifier: bigint,
     name?: string,
     last_name?: string,
     phone?: string,
@@ -55,7 +55,7 @@ export type UserObligatoryIdentifier = {
 };
 
 export type UserObligatoryIdentifierNoPassword = {
-    identifier: number,
+    identifier: bigint,
     name?: string,
     last_name?: string,
     phone?: string,
@@ -69,7 +69,7 @@ export type UserObligatoryIdentifierNoPassword = {
 };
 
 export type UserNotObligatoryIdentifier = {
-    identifier?: number,
+    identifier?: bigint,
     name?: string,
     last_name?: string,
     phone?: string,
@@ -96,7 +96,7 @@ export type UserNoIdentifier = {
 };
 
 export type UserUniqueFields = {
-    identifier: number,
+    identifier: bigint,
     phone?: string,
     email?: string
 };//UserWhereUniqueInput

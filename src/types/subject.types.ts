@@ -12,25 +12,25 @@ export type SubjectCreateData = {
     name: string,
     year?: number,
     description?: string
-    institutionId: number
+    institutionId: bigint
 }
 
 export type SubjectNotObligatoryIdentifier = {
-    identifier?: number,
+    identifier?: bigint,
     name?: string,
     year?: number,
     description?: string,
     createdAt?: Date,
     updatedAt?: Date,
-    institutionId?: number
+    institutionId?: bigint,
 }
 
 export type SubjectObligatoryIdentifier = {
-    identifier: number,
+    identifier: bigint,
     name?: string,
     year?: number,
     description?: string,
     createdAt?: Date,
     updatedAt?: Date,
-    institutionId?: number
+    institutionId?: bigint,
 }

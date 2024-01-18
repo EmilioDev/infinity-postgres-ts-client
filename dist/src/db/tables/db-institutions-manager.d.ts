@@ -5,7 +5,7 @@ export declare class DBInstitutionsManager {
     constructor(inst: PrismaClient);
     private get data();
     create(institution: CreateInstitutionType, select?: InstitutionSelectionableFields): import(".prisma/client").Prisma.Prisma__InstitutionClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         createdAt: Date;
         updatedAt: Date;
@@ -15,14 +15,13 @@ export declare class DBInstitutionsManager {
         REEUP: string;
         website: string;
         address: string;
-        rector: number;
-        evaluativeSchemeUsed: never;
+        rector: bigint;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     findFirst({ where, select }: {
         where: InstitutionIdentifierNotObligatory;
         select?: InstitutionSelectionableFields;
     }): import(".prisma/client").Prisma.Prisma__InstitutionClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         createdAt: Date;
         updatedAt: Date;
@@ -32,14 +31,13 @@ export declare class DBInstitutionsManager {
         REEUP: string;
         website: string;
         address: string;
-        rector: number;
-        evaluativeSchemeUsed: never;
+        rector: bigint;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findUnique({ where, select }: {
         where: InstitutionIdentifierObligatory;
         select?: InstitutionSelectionableFields;
     }): import(".prisma/client").Prisma.Prisma__InstitutionClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         createdAt: Date;
         updatedAt: Date;
@@ -49,11 +47,10 @@ export declare class DBInstitutionsManager {
         REEUP: string;
         website: string;
         address: string;
-        rector: number;
-        evaluativeSchemeUsed: never;
+        rector: bigint;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(where?: InstitutionIdentifierNotObligatory): import(".prisma/client").Prisma.PrismaPromise<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         description: string;
         logo: string;
@@ -63,14 +60,14 @@ export declare class DBInstitutionsManager {
         address: string;
         createdAt: Date;
         updatedAt: Date;
-        rector: number;
+        rector: bigint;
     }[]>;
     update({ where, data, select }: {
         where: InstitutionIdentifierFields;
         data: InstitutionNoIdentifier;
         select?: InstitutionSelectionableFields;
     }): import(".prisma/client").Prisma.Prisma__InstitutionClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         createdAt: Date;
         updatedAt: Date;
@@ -80,14 +77,13 @@ export declare class DBInstitutionsManager {
         REEUP: string;
         website: string;
         address: string;
-        rector: number;
-        evaluativeSchemeUsed: never;
+        rector: bigint;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     delete({ where, select }: {
         where: InstitutionIdentifierFields;
         select?: InstitutionSelectionableFields;
     }): import(".prisma/client").Prisma.Prisma__InstitutionClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         createdAt: Date;
         updatedAt: Date;
@@ -97,8 +93,7 @@ export declare class DBInstitutionsManager {
         REEUP: string;
         website: string;
         address: string;
-        rector: number;
-        evaluativeSchemeUsed: never;
+        rector: bigint;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     clean(): Promise<void>;
 }

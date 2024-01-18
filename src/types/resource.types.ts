@@ -22,23 +22,23 @@ export type ResourceCreateData = {
 }
 
 export type ResourceIdentifierNotObligatory = {
-    identifier?: number,
+    identifier?: bigint,
     name?: string,
     description?: string,
     photo?: string,
     requiresOnline?: boolean,
     evaluation?: number,
-    resourceTemplateId?: number,
+    resourceTemplateId?: bigint,
     templateCustomValues?: any
 }
 
 export type ResourceIdentifierObligatory = {
-    identifier: number,
+    identifier: bigint,
     name?: string,
     description?: string,
     photo?: string,
     requiresOnline?: boolean,
     evaluation?: number,
-    resourceTemplateId?: number,
+    resourceTemplateId?: bigint,
     templateCustomValues?: any
 }

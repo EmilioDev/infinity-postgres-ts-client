@@ -7,13 +7,13 @@ export type ResourceTemplateSeleccionableFields = {
 }
 
 export type ResourceTemplateCreateData = {
-    identifier: number,
+    identifier: bigint,
     content: any,
     templateName?: string
 }
 
 export type ResourceTemplateNotObligatoryIdentifier = {
-    identifier?: number,
+    identifier?: bigint,
     content?: any,
     templateName?: string,
     createdAt?: Date,
@@ -21,7 +21,7 @@ export type ResourceTemplateNotObligatoryIdentifier = {
 }
 
 export type ResourceTemplateObligatoryIdentifier = {
-    identifier: number,
+    identifier: bigint,
     content?: any,
     templateName?: string,
     createdAt?: Date,

@@ -5,52 +5,52 @@ export declare class DBStudentManager {
     constructor(prisma: PrismaClient);
     private get data();
     create(data: StudentCreateData): import(".prisma/client").Prisma.Prisma__StudentClient<{
-        identifier: number;
+        identifier: bigint;
         pendingApproval: boolean;
         createdAt: Date;
         updatedAt: Date;
-        userId: number;
-        courseId: number;
+        userId: bigint;
+        courseId: bigint;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     findFirst({ where, select }: {
         where: StudentIdentifierNotObligatory;
         select?: StudentSelectableFields;
     }): import(".prisma/client").Prisma.Prisma__StudentClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
-        userId: number;
-        courseId: number;
+        userId: bigint;
+        courseId: bigint;
         pendingApproval: boolean;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findUnique({ where, select }: {
         where: StudentIdentifierObligatory;
         select?: StudentSelectableFields;
     }): import(".prisma/client").Prisma.Prisma__StudentClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
-        userId: number;
-        courseId: number;
+        userId: bigint;
+        courseId: bigint;
         pendingApproval: boolean;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(where?: StudentIdentifierNotObligatory, select?: StudentSelectableFields): import(".prisma/client").Prisma.PrismaPromise<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
-        userId: number;
-        courseId: number;
+        userId: bigint;
+        courseId: bigint;
         pendingApproval: boolean;
     }[]>;
     delete({ where, select }: {
         where: StudentIdentifierObligatory;
         select?: StudentSelectableFields;
     }): import(".prisma/client").Prisma.Prisma__StudentClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
-        userId: number;
-        courseId: number;
+        userId: bigint;
+        courseId: bigint;
         pendingApproval: boolean;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     clean(): Promise<void>;

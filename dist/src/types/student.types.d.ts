@@ -8,22 +8,22 @@ export type StudentSelectableFields = {
 };
 export type StudentCreateData = {
     pendingApproval?: boolean;
-    userId: number;
-    courseId: number;
+    userId: bigint;
+    courseId: bigint;
 };
 export type StudentIdentifierNotObligatory = {
-    identifier?: number;
+    identifier?: bigint;
     pendingApproval?: boolean;
     createdAt?: Date;
     updatedAt?: Date;
-    userId?: number;
-    courseId?: number;
+    userId?: bigint;
+    courseId?: bigint;
 };
 export type StudentIdentifierObligatory = {
-    identifier: number;
+    identifier: bigint;
     pendingApproval?: boolean;
     createdAt?: Date;
     updatedAt?: Date;
-    userId?: number;
-    courseId?: number;
+    userId?: bigint;
+    courseId?: bigint;
 };

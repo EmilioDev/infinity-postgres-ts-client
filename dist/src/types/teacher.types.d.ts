@@ -6,20 +6,20 @@ export type TeacherSelectableFields = {
     userId?: boolean;
 };
 export type TeacherCreateData = {
-    courseId: number;
-    userId: number;
+    courseId: bigint;
+    userId: bigint;
 };
 export type TeacherIdentifierNotObligatory = {
-    courseId?: number;
-    userId?: number;
-    identifier?: number;
+    courseId?: bigint;
+    userId?: bigint;
+    identifier?: bigint;
     createdAt?: Date;
     updatedAt?: Date;
 };
 export type TeacherIdentifierObligatory = {
-    identifier: number;
-    courseId?: number;
-    userId?: number;
+    identifier: bigint;
+    courseId?: bigint;
+    userId?: bigint;
     createdAt?: Date;
     updatedAt?: Date;
 };

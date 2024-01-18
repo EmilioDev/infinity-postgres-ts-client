@@ -37,7 +37,7 @@ export type ConfigurableUser<T extends UserSelectFields> = {
     updatedAt?: T['updatedAt'] extends true ? Date : never;
 };
 export type UserObligatoryIdentifier = {
-    identifier: number;
+    identifier: bigint;
     name?: string;
     last_name?: string;
     phone?: string;
@@ -51,7 +51,7 @@ export type UserObligatoryIdentifier = {
     isSuperUser?: boolean;
 };
 export type UserObligatoryIdentifierNoPassword = {
-    identifier: number;
+    identifier: bigint;
     name?: string;
     last_name?: string;
     phone?: string;
@@ -64,7 +64,7 @@ export type UserObligatoryIdentifierNoPassword = {
     isSuperUser?: boolean;
 };
 export type UserNotObligatoryIdentifier = {
-    identifier?: number;
+    identifier?: bigint;
     name?: string;
     last_name?: string;
     phone?: string;
@@ -89,7 +89,7 @@ export type UserNoIdentifier = {
     isSuperUser?: boolean;
 };
 export type UserUniqueFields = {
-    identifier: number;
+    identifier: bigint;
     phone?: string;
     email?: string;
 };

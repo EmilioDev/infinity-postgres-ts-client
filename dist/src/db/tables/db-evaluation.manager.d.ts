@@ -5,58 +5,58 @@ export declare class DBEvaluationManager {
     constructor(prisma: PrismaClient);
     private get data();
     create(data: EvaluationCreateData): import(".prisma/client").Prisma.Prisma__EvaluationClient<{
-        identifier: number;
+        identifier: bigint;
         value: number;
         evaluationName: string;
         isFinal: boolean;
         createdAt: Date;
         updatedAt: Date;
-        studentId: number;
+        studentId: bigint;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     findFirst({ where, select }: {
         where: EvaluationIdentifierNotObligatory;
         select?: EvaluationSelectableFields;
     }): import(".prisma/client").Prisma.Prisma__EvaluationClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
         value: number;
         evaluationName: string;
         isFinal: boolean;
-        studentId: number;
+        studentId: bigint;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findUnique({ where, select }: {
         where: EvaluationIdentifierObligatory;
         select?: EvaluationSelectableFields;
     }): import(".prisma/client").Prisma.Prisma__EvaluationClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
         value: number;
         evaluationName: string;
         isFinal: boolean;
-        studentId: number;
+        studentId: bigint;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(where?: EvaluationIdentifierNotObligatory, select?: EvaluationSelectableFields): import(".prisma/client").Prisma.PrismaPromise<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
         value: number;
         evaluationName: string;
         isFinal: boolean;
-        studentId: number;
+        studentId: bigint;
     }[]>;
     delete({ where, select }: {
         where: EvaluationIdentifierObligatory;
         select?: EvaluationSelectableFields;
     }): import(".prisma/client").Prisma.Prisma__EvaluationClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
         value: number;
         evaluationName: string;
         isFinal: boolean;
-        studentId: number;
+        studentId: bigint;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     clean(): Promise<void>;
 }

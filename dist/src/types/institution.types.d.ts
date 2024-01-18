@@ -8,7 +8,6 @@ export type InstitutionSelectionableFields = {
     createdAt?: boolean;
     updatedAt?: boolean;
     rector?: boolean;
-    evaluativeSchemeUsed?: boolean;
     description?: boolean;
     logo?: boolean;
 };
@@ -18,12 +17,12 @@ export type CreateInstitutionType = {
     REEUP: string;
     website?: string;
     address?: string;
-    rector: number;
+    rector: bigint;
     description?: string;
     logo?: string;
 };
 export type InstitutionIdentifierNotObligatory = {
-    identifier?: number;
+    identifier?: bigint;
     name?: string;
     NIT?: string;
     REEUP?: string;
@@ -31,13 +30,12 @@ export type InstitutionIdentifierNotObligatory = {
     address?: string;
     createdAt?: Date;
     updatedAt?: Date;
-    rector?: number;
-    evaluativeSchemeUsed?: number;
+    rector?: bigint;
     description?: string;
     logo?: string;
 };
 export type InstitutionIdentifierObligatory = {
-    identifier: number;
+    identifier: bigint;
     name?: string;
     NIT?: string;
     REEUP?: string;
@@ -45,13 +43,12 @@ export type InstitutionIdentifierObligatory = {
     address?: string;
     createdAt?: Date;
     updatedAt?: Date;
-    rector?: number;
-    evaluativeSchemeUsed?: number;
+    rector?: bigint;
     description?: string;
     logo?: string;
 };
 export type InstitutionIdentifierFields = {
-    identifier: number;
+    identifier: bigint;
 };
 export type InstitutionNoIdentifier = {
     name?: string;
@@ -61,8 +58,7 @@ export type InstitutionNoIdentifier = {
     address?: string;
     createdAt?: Date;
     updatedAt?: Date;
-    rector?: number;
-    evaluativeSchemeUsed?: number;
+    rector?: bigint;
     description?: string;
     logo?: string;
 };

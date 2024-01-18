@@ -5,48 +5,48 @@ export declare class DBMetodologistManager {
     constructor(prisma: PrismaClient);
     private get data();
     create(data: MetodologistCreate): import(".prisma/client").Prisma.Prisma__MetodologistClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
-        userId: number;
-        courseId: number;
+        userId: bigint;
+        courseId: bigint;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     findFirst({ where, select }: {
         where: MetodologistNotObligatoryIdentifier;
         select?: MetodologistSelectionableFields;
     }): import(".prisma/client").Prisma.Prisma__MetodologistClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
-        userId: number;
-        courseId: number;
+        userId: bigint;
+        courseId: bigint;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findUnique({ where, select }: {
         where: MetodologistObligatoryIdentifier;
         select?: MetodologistSelectionableFields;
     }): import(".prisma/client").Prisma.Prisma__MetodologistClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
-        userId: number;
-        courseId: number;
+        userId: bigint;
+        courseId: bigint;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(where?: MetodologistNotObligatoryIdentifier): import(".prisma/client").Prisma.PrismaPromise<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
-        userId: number;
-        courseId: number;
+        userId: bigint;
+        courseId: bigint;
     }[]>;
     delete({ where, select }: {
         where: MetodologistUniquefields;
         select?: MetodologistSelectionableFields;
     }): import(".prisma/client").Prisma.Prisma__MetodologistClient<{
-        identifier: number;
+        identifier: bigint;
         createdAt: Date;
         updatedAt: Date;
-        userId: number;
-        courseId: number;
+        userId: bigint;
+        courseId: bigint;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     clean(): Promise<void>;
 }

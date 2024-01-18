@@ -8,7 +8,7 @@ export declare class DBUsersManager {
         data: UserCreateData;
         select?: UserSelectFields;
     }): import(".prisma/client").Prisma.Prisma__UserClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         last_name: string;
         phone: string;
@@ -25,7 +25,7 @@ export declare class DBUsersManager {
         where: UserNotObligatoryIdentifier;
         select?: UserSelectFields;
     }): import(".prisma/client").Prisma.Prisma__UserClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         last_name: string;
         phone: string;
@@ -42,7 +42,7 @@ export declare class DBUsersManager {
         where: UserObligatoryIdentifier;
         select?: UserSelectFields;
     }): import(".prisma/client").Prisma.Prisma__UserClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         last_name: string;
         phone: string;
@@ -56,7 +56,7 @@ export declare class DBUsersManager {
         isSuperUser: boolean;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(where?: UserNotObligatoryIdentifier): import(".prisma/client").Prisma.PrismaPromise<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         last_name: string;
         phone: string;
@@ -74,7 +74,7 @@ export declare class DBUsersManager {
         data: UserNoIdentifier;
         select?: UserSelectFields;
     }): import(".prisma/client").Prisma.Prisma__UserClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         last_name: string;
         phone: string;
@@ -91,7 +91,7 @@ export declare class DBUsersManager {
         where: UserUniqueFields;
         select?: UserSelectFields;
     }): import(".prisma/client").Prisma.Prisma__UserClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         last_name: string;
         phone: string;
@@ -105,13 +105,13 @@ export declare class DBUsersManager {
         isSuperUser: boolean;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     setAsSuperUser(identifier: number): import(".prisma/client").Prisma.Prisma__UserClient<{
-        identifier: number;
+        identifier: bigint;
         phone: string;
         email: string;
         isSuperUser: boolean;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     removeSuperUserPrivilegies(identifier: number): import(".prisma/client").Prisma.Prisma__UserClient<{
-        identifier: number;
+        identifier: bigint;
         phone: string;
         email: string;
         isSuperUser: boolean;

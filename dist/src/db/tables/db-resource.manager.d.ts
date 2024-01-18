@@ -5,7 +5,7 @@ export declare class DBResourcesManager {
     constructor(prisma: PrismaClient);
     private get data();
     create(data: ResourceCreateData): import(".prisma/client").Prisma.Prisma__ResourceClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         description: string;
         photo: string;
@@ -13,14 +13,14 @@ export declare class DBResourcesManager {
         evaluation: number;
         createdAt: Date;
         updatedAt: Date;
-        resourceTemplateId: number;
+        resourceTemplateId: bigint;
         templateCustomValues: import(".prisma/client").Prisma.JsonValue;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     findFirst({ where, select }: {
         where: ResourceIdentifierNotObligatory;
         select?: ResourceSelectionableFields;
     }): import(".prisma/client").Prisma.Prisma__ResourceClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         photo: string;
         createdAt: Date;
@@ -28,14 +28,14 @@ export declare class DBResourcesManager {
         description: string;
         evaluation: number;
         requiresOnline: boolean;
-        resourceTemplateId: number;
+        resourceTemplateId: bigint;
         templateCustomValues: import(".prisma/client").Prisma.JsonValue;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findUnique({ where, select }: {
         where: ResourceIdentifierObligatory;
         select?: ResourceSelectionableFields;
     }): import(".prisma/client").Prisma.Prisma__ResourceClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         photo: string;
         createdAt: Date;
@@ -43,11 +43,11 @@ export declare class DBResourcesManager {
         description: string;
         evaluation: number;
         requiresOnline: boolean;
-        resourceTemplateId: number;
+        resourceTemplateId: bigint;
         templateCustomValues: import(".prisma/client").Prisma.JsonValue;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(where?: ResourceIdentifierNotObligatory): import(".prisma/client").Prisma.PrismaPromise<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         description: string;
         photo: string;
@@ -55,14 +55,14 @@ export declare class DBResourcesManager {
         evaluation: number;
         createdAt: Date;
         updatedAt: Date;
-        resourceTemplateId: number;
+        resourceTemplateId: bigint;
         templateCustomValues: import(".prisma/client").Prisma.JsonValue;
     }[]>;
     delete({ where, select }: {
         where: ResourceIdentifierObligatory;
         select?: ResourceSelectionableFields;
     }): import(".prisma/client").Prisma.Prisma__ResourceClient<{
-        identifier: number;
+        identifier: bigint;
         name: string;
         photo: string;
         createdAt: Date;
@@ -70,7 +70,7 @@ export declare class DBResourcesManager {
         description: string;
         evaluation: number;
         requiresOnline: boolean;
-        resourceTemplateId: number;
+        resourceTemplateId: bigint;
         templateCustomValues: import(".prisma/client").Prisma.JsonValue;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     clean(): Promise<void>;

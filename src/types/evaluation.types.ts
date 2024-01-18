@@ -12,17 +12,17 @@ export type EvaluationCreateData = {
     value: number,
     evaluationName?: string,
     isFinal?: boolean,
-    studentId: number
+    studentId: bigint,
 }
 
 export type EvaluationIdentifierNotObligatory = {
-    identifier?: number,
+    identifier?: bigint,
     value?: number,
     evaluationName?: string,
     isFinal?: boolean,
     createdAt?: Date,
     updatedAt?: Date,
-    studentId?: number
+    studentId?: bigint,
 }
 
 export type EvaluationIdentifierObligatory = {
@@ -32,5 +32,5 @@ export type EvaluationIdentifierObligatory = {
     isFinal?: boolean,
     createdAt?: Date,
     updatedAt?: Date,
-    studentId?: number
+    studentId?: bigint,
 }
